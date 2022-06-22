@@ -10,17 +10,26 @@ print(f'\nBoa sorte! {nome}')
 lista = ['palavras', 'apenas', 'pequenas', 'vento']
 
 x = random.choice(lista)
+tamanho = len(x)
 
 forca = []
+letras = []
 
 for j in range(len(x)):
-    forca.append('_')
+    forca.append('*')
 
-turnos = 0
-while turnos < 12:
-    turnos += 1
+print(f'\nA palavra tem {tamanho} letras')
+
+turnos = 12
+while turnos != 0:
+    print(f'Você tem {turnos} chances')
 
     letra = input('\nTente uma letra: ')
+    
+    while letra in letras:
+        letra = input('\nTente uma letra: ')
+    
+    letras.append(letra)
 
     for i in range(len(x)):
         if letra == x[i]:
@@ -33,9 +42,10 @@ while turnos < 12:
     palavra = ''.join(forca)
 
     if x == palavra:
+        print(f'\nParabéns, {nome}! Você acertou a palavra.')
         break
+    
+    turnos -= 1
 
-if turnos <= 12:
-    print(f'\nParabéns, {nome}! Você acertou a palavra em {turnos} chutes.')
-else:
+if x != palavra:
     print(f'\nMais sorte na próxima vez, {nome}! A palavra era {x}')
